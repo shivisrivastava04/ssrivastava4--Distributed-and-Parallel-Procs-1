@@ -9,7 +9,7 @@
 float A[N][N], B[N][N];
 
 int threadPerBlock=256;
-int block=(int)N/256;
+int block=(int)N/threadPerBlock;
 
 /* Initialize A and B*/
 void initialize_inputs() {

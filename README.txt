@@ -1,4 +1,8 @@
 /* I used Bitvise for compiling and executing code over chameleon 
+*
+* Created a MakeFile - "$ make"
+* If that does not work compile as below
+*
 * Cameleon instance name - ssrivastava4-hw4
 * Compile with “nvcc matrixNormalization.cu -o matn” on linux 
 * Run as “./matn” 
