@@ -30,21 +30,22 @@ __global__ void matrixNorm(float *d_A, float *d_B, int n) {
     int col = blockIdx.x * blockDim.x + threadIdx.x; //unique id of thread within the grid
     int row;
     float mu, sigma;
-    if (col < n){
+//  printf("%f\n",*d_A);   
+ if (col < n){
         mu = (float)0.0;
         for (row=0; row < n; row++)
             mu += d_A[col*n+row];
         mu /= (float) n;
 
-        __syncthreads();
-
+      __syncthreads();
+       //printf("%f\n",mu);
         sigma = (float)0.0;
         for (row=0; row < n; row++)
             sigma += powf(d_A[col*n+row] - mu, (float)2.0);
         sigma /= (float) n;
 
         __syncthreads();
-
+   //    printf("row2 %d\n",col);
         sigma = sqrt(sigma);
 
         for (row=0; row < n; row++) {
@@ -75,6 +76,7 @@ return 0;
 }
 
 if(cudaMemcpy(d_A, A, sizeof(float)*N*N, cudaMemcpyHostToDevice)!=cudaSuccess){
+printf("inside this");
 cudaFree(d_A);
 cudaFree(d_B);
 return 0;
